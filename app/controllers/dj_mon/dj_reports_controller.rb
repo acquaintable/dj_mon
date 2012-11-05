@@ -34,7 +34,6 @@ module DjMon
     end
 
     def retry
-      logger.info ProvisionJob
       DjMon::Backend.retry params[:id]
       respond_to do |format|
         format.html { redirect_to root_url, :notice => "The job has been queued for a re-run" }
@@ -44,6 +43,22 @@ module DjMon
 
     def destroy
       DjMon::Backend.destroy params[:id]
+      respond_to do |format|
+        format.html { redirect_to root_url, :notice => "The job was deleted" }
+        format.json { head(:ok) }
+      end
+    end
+
+    def make_success
+      DjMon::Backend.make_success params[:id]
+      respond_to do |format|
+        format.html { redirect_to root_url, :notice => "The job was made success" }
+        format.json { head(:ok) }
+      end
+    end
+
+    def make_fail
+      DjMon::Backend.make_fail params[:id]
       respond_to do |format|
         format.html { redirect_to root_url, :notice => "The job was deleted" }
         format.json { head(:ok) }
