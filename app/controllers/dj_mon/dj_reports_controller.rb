@@ -34,6 +34,7 @@ module DjMon
     end
 
     def retry
+      logger.info ProvisionJob
       DjMon::Backend.retry params[:id]
       respond_to do |format|
         format.html { redirect_to root_url, :notice => "The job has been queued for a re-run" }

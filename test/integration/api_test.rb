@@ -144,6 +144,27 @@ class ApiTest < ActionDispatch::IntegrationTest
     end
   end
 
+ context "POST /makesuccess/:id" do
+    should "invoke make_success method if the job respond to" do
+      job = build_monster_jobs.first
+      authorized_post "/dj_mon/dj_reports/#{job.id}/makesuccess", :format=> 'json'
+
+      assert Delayed::Job.where(:id=> job.id).empty?
+      assert response.body.strip.empty?
+    end
+  end
+
+ context "POST /makefail/:id" do
+    should "invoke make_fail method if the job respond to" do
+      job = build_monster_jobs.first
+      authorized_post "/dj_mon/dj_reports/#{job.id}/makesuccess", :format=> 'json'
+
+      assert Delayed::Job.where(:id=> job.id).empty?
+      assert response.body.strip.empty?
+    end
+ end
+
+
   private
 
   def build_queued_jobs(options = {})
@@ -170,6 +191,15 @@ class ApiTest < ActionDispatch::IntegrationTest
       job
     end
   end
+  def build_monster_jobs(options = {})
+    options = { :count=> 1, :priority=> 1, :queue=> 'queue_mailer' }.merge(options)
+    options[:count].times.map do
+      job = Delayed::Job.enqueue(TestMonsterJob.new, :priority=> options[:priority], :queue=> options[:queue])
+      worker.run(job)
+      job
+    end
+  end
+
 
   def worker
     Delayed::Worker.new
