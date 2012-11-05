@@ -26,6 +26,8 @@ module DjMon
 
     def payload job
       job.payload_object.respond_to?(:object) ? job.payload_object.object.to_yaml : job.payload_object.to_yaml
+    rescue
+      {:error => "DeserializedError"}.to_yaml
     end
 
     class << self

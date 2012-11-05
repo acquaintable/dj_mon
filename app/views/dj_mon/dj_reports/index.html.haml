@@ -66,9 +66,9 @@
           = form_tag CGI.unescape(retry_dj_report_url(:id => "{{id}}")), :method => :post, :class => 'form-inline' do
             = submit_tag 'Retry', :class => 'btn btn-info btn-mini'
           = form_tag CGI.unescape(make_success_dj_report_url(:id => "{{id}}")), :method => :post, :class => 'form-inline' do
-            = submit_tag 'MakeSuccess', :class => 'btn btn-info btn-mini'
+            = submit_tag 'SuccessIt', :class => 'btn btn-info btn-mini'
           = form_tag CGI.unescape(make_fail_dj_report_url(:id => "{{id}}")), :method => :post, :class => 'form-inline' do
-            = submit_tag 'MakeFail', :class => 'btn btn-info btn-mini' 
+            = submit_tag 'FailIt', :class => 'btn btn-info btn-mini' 
           = form_tag CGI.unescape(dj_report_url(:id => "{{id}}")), :method => :delete, :class => 'form-inline' do
             = submit_tag 'Delete', :class => 'btn btn-danger btn-mini'
 
