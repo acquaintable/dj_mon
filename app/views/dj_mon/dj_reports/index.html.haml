@@ -84,7 +84,8 @@
       %h3
         Last Error
     .modal-body
-      %code
-        {{content}}
+      %pre
+        %code
+          {{content}}
     .modal-footer
       = link_to "Close", '#', :class => 'btn btn-primary', 'data-dismiss'=> 'modal'
