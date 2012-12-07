@@ -3,7 +3,12 @@ module DjMon
     respond_to :json, :html
     layout 'dj_mon'
 
-    before_filter :authenticate
+    if Rails.configuration.dj_mon.use_devise
+      before_filter :authenticate_user!
+      before_filter :is_admin? if Rails.configuration.dj_mon.use_devise_require_admin
+    else
+      before_filter :authenticate
+    end
     before_filter :set_api_version
 
     def index
@@ -60,6 +65,11 @@ module DjMon
 
     def set_api_version
       response.headers['DJ-Mon-Version'] = DjMon::VERSION
+    end
+
+    private
+    def is_admin?
+      redirect_to '/' unless current_user.admin?
     end
 
   end
