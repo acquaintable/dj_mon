@@ -1,3 +1,9 @@
+# This is a fork of the amazing DJ Mon that adds Devise support.
+To enable devise support, configure your dj_mon_config.rb
+    
+    YourApp::Application.config.dj_mon.use_devise = true
+    YourApp::Application.config.dj_mon.use_devise_require_admin = true
+
 # DJ Mon [![Build Status](https://secure.travis-ci.org/akshayrawat/dj_mon.png?branch=master)](http://travis-ci.org/akshayrawat/dj_mon)
 
 A Rails engine based frontend for Delayed Job. It also has an [iPhone app](http://itunes.apple.com/app/dj-mon/id552732872).
