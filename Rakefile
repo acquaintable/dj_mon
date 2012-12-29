@@ -19,7 +19,7 @@ namespace :test do
     t.libs = [ "test/dummy_active_record" ]
   end
 
-  if RUBY_VERSION =~ /^1\.9/
+  if false #RUBY_VERSION =~ /^1\.9/
 
     desc "Run all tests for the Mongoid backend"
     Rake::TestTask.new(:mongoid) do |t|

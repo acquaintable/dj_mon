@@ -65,7 +65,10 @@
           
           = form_tag CGI.unescape(retry_dj_report_url(:id => "{{id}}")), :method => :post, :class => 'form-inline' do
             = submit_tag 'Retry', :class => 'btn btn-info btn-mini'
-
+          = form_tag CGI.unescape(make_success_dj_report_url(:id => "{{id}}")), :method => :post, :class => 'form-inline' do
+            = submit_tag 'SuccessIt', :class => 'btn btn-info btn-mini'
+          = form_tag CGI.unescape(make_fail_dj_report_url(:id => "{{id}}")), :method => :post, :class => 'form-inline' do
+            = submit_tag 'FailIt', :class => 'btn btn-info btn-mini' 
           = form_tag CGI.unescape(dj_report_url(:id => "{{id}}")), :method => :delete, :class => 'form-inline' do
             = submit_tag 'Delete', :class => 'btn btn-danger btn-mini'
 
@@ -81,7 +84,8 @@
       %h3
         Last Error
     .modal-body
-      %code
-        {{content}}
+      %pre
+        %code
+          {{content}}
     .modal-footer
       = link_to "Close", '#', :class => 'btn btn-primary', 'data-dismiss'=> 'modal'

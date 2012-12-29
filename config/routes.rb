@@ -10,6 +10,8 @@ DjMon::Engine.routes.draw do
       get :settings
     end
     member do
+      post :make_success
+      post :make_fail
       post :retry
     end
   end

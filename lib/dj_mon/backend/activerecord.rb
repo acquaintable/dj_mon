@@ -27,6 +27,20 @@ module DjMon
           dj = Delayed::Job.find(id)
           dj.update_attribute :failed_at, nil if dj
         end
+
+        def make_success id
+          dj = Delayed::Job.find id
+          handler  = YAML.load dj.handler
+          handler.make_success dj
+          destroy id if dj
+        end
+
+        def make_fail id
+          dj = Delayed::Job.find id
+          handler  = YAML.load dj.handler
+          handler.make_fail dj
+          destroy id if dj
+        end
       end
     end
   end
